@@ -1,0 +1,31 @@
+<div class="jumbotron text-center">
+  <h2><img class="jumbo-thumbnail" src="https://cdn.auth0.com/styleguide/1.0.0/img/badge.svg"></h2>
+  <h1>RoR Auth0 Sample</h1>
+  <p>Step 2 - Custom Login.</p>
+  <p class="text-center"><%= notice %></p>
+</div>
+
+<div class="container">
+  <div class="col-md-6 col-md-3">
+    <div id="login-container">
+      <%= form_tag(action:'auth') do %>
+          <%= text_field_tag :user, "", class:'form-control' %>
+          <br>
+          <%= password_field_tag :password, "", class:'form-control'%></p>
+          <br>
+          <%= submit_tag("Log In", class: "btn btn-primary") %>
+          <%= submit_tag("Sign up", name: "signup", class:"btn btn-primary") %>
+      <% end %>
+      <%= link_to "Login with Google" ,
+      "http://#{ENV['AUTH0_DOMAIN']}/authorize?client_id=#{ENV['AUTH0_CLIENT_ID']}&response_type=code&redirect_to=#{ENV['AUTH0_CALLBACK_URL']}&state=OPAQUE_VALUE&connection=google-oauth2"%>
+    </div>
+  </div>
+</section>
+          <!--<button class="btn btn-primary" type="submit" onclick="signup()">Sign Up</button>
+        </fieldset>
+      </form>
+
+      <a href="" onclick="googleLogin()">Login with Google</a><br/>
+    </div>
+  </div>
+</div> -->
