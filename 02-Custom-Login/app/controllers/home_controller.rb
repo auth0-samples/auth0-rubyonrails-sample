@@ -36,6 +36,8 @@ class HomeController < ApplicationController
       },
       connection:'Username-Password-Authentication'
     )
+
+    session[:token_id] = token
   end
 
   def signup
