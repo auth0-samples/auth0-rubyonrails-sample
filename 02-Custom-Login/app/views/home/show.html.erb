@@ -1,9 +1,9 @@
-<div class="jumbotron text-center">
+<section class="jumbotron text-center">
   <h2><img class="jumbo-thumbnail" src="https://cdn.auth0.com/styleguide/1.0.0/img/badge.svg"></h2>
   <h1>RoR Auth0 Sample</h1>
   <p>Step 2 - Custom Login.</p>
   <p class="text-center"><%= notice %></p>
-</div>
+</section>
 
 <div class="container">
   <div class="col-md-6 col-md-3">
@@ -13,8 +13,8 @@
           <br>
           <%= password_field_tag :password, "", class:'form-control'%></p>
           <br>
-          <%= submit_tag("Log In", class: "btn btn-primary") %>
-          <%= submit_tag("Sign up", name: "signup", class:"btn btn-primary") %>
+          <%= submit_tag("Login", class: "btn btn-success btn-lg") %>
+          <%= submit_tag("Sign up", name: "signup", class:"btn btn-success btn-lg") %>
       <% end %>
       <%= link_to "Login with Google" ,
       "https://#{ENV['AUTH0_DOMAIN']}/authorize/?client_id=#{ENV['AUTH0_CLIENT_ID']}&response_type=code&redirect_uri=#{ENV['AUTH0_CALLBACK_URL']}&state=OPAQUE_VALUE&connection=google-oauth2"%>
