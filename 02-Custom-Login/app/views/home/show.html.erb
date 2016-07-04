@@ -17,15 +17,7 @@
           <%= submit_tag("Sign up", name: "signup", class:"btn btn-primary") %>
       <% end %>
       <%= link_to "Login with Google" ,
-      "http://#{ENV['AUTH0_DOMAIN']}/authorize?client_id=#{ENV['AUTH0_CLIENT_ID']}&response_type=code&redirect_to=#{ENV['AUTH0_CALLBACK_URL']}&state=OPAQUE_VALUE&connection=google-oauth2"%>
+      "https://#{ENV['AUTH0_DOMAIN']}/authorize/?client_id=#{ENV['AUTH0_CLIENT_ID']}&response_type=code&redirect_uri=#{ENV['AUTH0_CALLBACK_URL']}&state=OPAQUE_VALUE&connection=google-oauth2"%>
     </div>
   </div>
-</section>
-          <!--<button class="btn btn-primary" type="submit" onclick="signup()">Sign Up</button>
-        </fieldset>
-      </form>
-
-      <a href="" onclick="googleLogin()">Login with Google</a><br/>
-    </div>
-  </div>
-</div> -->
+</div>
