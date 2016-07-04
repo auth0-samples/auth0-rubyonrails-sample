@@ -14,9 +14,8 @@ class HomeController < ApplicationController
     begin
       if params[:signup]
         signup
-      else
-        login
       end
+      login
       redirect_to '/dashboard'
     rescue Auth0::Unauthorized
       redirect_to '/', notice: 'Invalid email or password'
@@ -41,7 +40,7 @@ class HomeController < ApplicationController
   end
 
   def signup
-    token = client.signup(
+    client.signup(
       params[:user],
       params[:password]
     )
