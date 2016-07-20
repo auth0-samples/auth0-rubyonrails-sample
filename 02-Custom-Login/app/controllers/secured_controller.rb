@@ -1,11 +1,10 @@
+# frozen_string_literal: true
 class SecuredController < ApplicationController
   before_action :logged_in?
 
   private
 
   def logged_in?
-    unless session[:token_id].present?
-      redirect_to '/'
-    end
+    redirect_to '/' unless session[:token_id].present?
   end
 end
