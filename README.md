@@ -1,6 +1,6 @@
 # auth0-rubyonrails-sample
 
-Auth0 Ruby On Rails examples
+Auth0 Ruby On Rails seed project + quickstart samples
 
 The example from the repo https://github.com/auth0/ruby-auth0/tree/master/examples/ruby-on-rails-api needs to be moved to this one
 
