@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RubyOnRails Auth0 Sample</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= yield :cdn_code %>
+  <%= stylesheet_link_tag    '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag    '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' %>
+  <%= javascript_include_tag '//cdn.auth0.com/js/lock/10.0.0/lock.min.js' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://auth0.com">Auth0</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="<%= 'active' if params[:controller] == 'home' %>"><a href="/">Home</a></li>
+            <li class="<%= 'active' if params[:controller] == 'dashboard' %>"><a href="/dashboard">My Dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+ <div class="container">
+<%= yield %>
+</div>
+</body>
+</html>

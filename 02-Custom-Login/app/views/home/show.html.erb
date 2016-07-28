@@ -1,0 +1,22 @@
+<section class="jumbotron text-center">
+  <h2><img class="jumbo-thumbnail" src="https://cdn.auth0.com/styleguide/1.0.0/img/badge.svg"></h2>
+  <h1>RoR Auth0 Sample</h1>
+  <p>Step 2 - Custom Login.</p>
+  <p class="text-center"><%= notice %></p>
+</section>
+
+<div class="container">
+  <div class="col-md-6 col-md-3">
+    <div id="login-container">
+      <%= form_tag do %>
+          <%= text_field_tag :user, "", class:'form-control' %>
+          <br>
+          <%= password_field_tag :password, "", class:'form-control'%></p>
+          <br>
+          <%= submit_tag("Login", class: "btn btn-success btn-lg") %>
+          <%= submit_tag("Sign up", name: "signup", class:"btn btn-success btn-lg") %>
+      <% end %>
+      <%= link_to "Login with Google" , controller: :auth0, action: :google_authorize %>
+    </div>
+  </div>
+</div>
