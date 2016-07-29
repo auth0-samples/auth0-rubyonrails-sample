@@ -1,0 +1,9 @@
+inherit_from: .rubocop_todo.yml
+Rails:
+  Enabled: true
+Documentation:
+  Enabled: false
+AllCops:
+ Exclude:
+   - bin/**/*
+   - vendor/**/*
