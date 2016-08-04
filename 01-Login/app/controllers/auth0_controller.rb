@@ -1,13 +1,16 @@
 class Auth0Controller < ApplicationController
   def callback
-    # example request.env['omniauth.auth'] in https://github.com/auth0/omniauth-auth0#auth-hash
-    # id_token = session[:userinfo]['credentials']['id_token']
-    # store the user profile in session and redirect to root
+    # OmniAuth places the User Profile information (retrieved by omniauth-auth0) in request.env['omniauth.auth'].
+    # In this tutorial, you will store that info in the session, under 'userinfo'.
+    # If the id_token is needed, you can get it from session[:userinfo]['credentials']['id_token'].
+    # Refer to https://github.com/auth0/omniauth-auth0#auth-hash for complete information on 'omniauth.auth' contents.
     session[:userinfo] = request.env['omniauth.auth']
 
     redirect_to '/dashboard'
   end
 
+  # if user authentication fails on the provider side OmniAuth will redirect to /auth/failure,
+  # passing the error message in the 'message' request param.
   def failure
     @error_msg = request.params['message']
   end

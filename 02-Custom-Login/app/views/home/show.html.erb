@@ -1,17 +1,17 @@
-<section class="jumbotron text-center">
-  <h2><img class="jumbo-thumbnail" src="https://cdn.auth0.com/styleguide/1.0.0/img/badge.svg"></h2>
-  <h1>RoR Auth0 Sample</h1>
-  <p>Step 2 - Custom Login.</p>
-  <p class="text-center"><%= notice %></p>
-</section>
-
 <div class="container">
   <div class="col-md-6 col-md-3">
     <div id="login-container">
       <%= form_tag do %>
-          <%= text_field_tag :user, "", class:'form-control' %>
+          <h2 class="form-signin-heading">Please sign in</h2>
+          <% unless notice.nil? %>
+            <div class="alert alert-danger fade in">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <%= notice %>
+            </div>
+          <% end %>
+          <%= text_field_tag :user, "", class:'form-control', placeholder:'Email address' %>
           <br>
-          <%= password_field_tag :password, "", class:'form-control'%></p>
+          <%= password_field_tag :password, "", class:'form-control', placeholder:'Password'%></p>
           <br>
           <%= submit_tag("Login", class: "btn btn-success btn-lg") %>
           <%= submit_tag("Sign up", name: "signup", class:"btn btn-success btn-lg") %>
