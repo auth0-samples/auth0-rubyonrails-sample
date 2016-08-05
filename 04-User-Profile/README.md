@@ -1,4 +1,4 @@
-# Login
+# User Profile
 [Full Tutorial](https://auth0.com/docs/quickstart/webapp/rails/04-user-profile)
 
 This example shows how to retrieve an Auth0 user’s profile ([normalized and full](https://auth0.com/docs/user-profile/user-profile-details)) in a Rails application using OmniAuth.
@@ -8,16 +8,17 @@ In order to run the example you need to have ruby installed.
 
 You also need to set the ClientSecret, ClientId, Domain and CallbackURL for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN` and `AUTH0_CALLBACK_URL`.
 
-For that, if you just create a file named `.env` in the project directory and set the values as follows, the app will just work:
+Set the environment variables in `.env` to match those your Auth0 Client.
 
 ````bash
 # .env file
-AUTH0_CLIENT_SECRET=myCoolSecret
 AUTH0_CLIENT_ID=myCoolClientId
+AUTH0_CLIENT_SECRET=myCoolSecret
 AUTH0_DOMAIN=samples.auth0.com
 AUTH0_CALLBACK_URL=http://localhost:3000/auth/auth0/callback
 ````
 Once you've set those 4 environment variables, run `bundle install` and then `rails s`. Now, browse [http://localhost:3000/](http://localhost:3000/).
+__Note:__ Remember that you need to have `./bin` in your path for `rails s` to work.
 
 Shut it down manually with Ctrl-C.
 
@@ -26,6 +27,7 @@ __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfi
 ## Important Snippets
 
 ### 1. Store the User Profile Data Upon Successful Authentication
+[Auth0 Controller Code](/04-User-Profile/app/controllers/auth0_controller.rb)
 ```ruby
 class Auth0Controller < ApplicationController
   def callback
@@ -41,8 +43,10 @@ end
 ```
 
 ### 2. Retrieve the User Data in the Dashboard Controller
+[Dashboard Controller Code](/04-User-Profile/app/controllers/dashboard_controller.rb)
 ```ruby
-class DashboardController < SecuredController
+class DashboardController < ApplicationController
+  include Secured
   def show
     @user = session[:userinfo]
   end
@@ -50,6 +54,7 @@ end
 ```
 
 ### 3. Show the User Profile in the Dashboard View
+[Dashboard View Code](/04-User-Profile/app/views/dashboard/show.html.erb)
 ```ruby
 <section class="jumbotron  text-center">
   <h2><img class="jumbo-thumbnail img-circle" src="${ '<%= @user[:info][:image] %>' }"/></h2>

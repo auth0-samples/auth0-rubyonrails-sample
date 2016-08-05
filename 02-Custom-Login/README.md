@@ -8,16 +8,17 @@ In order to run the example you need to have ruby installed.
 
 You also need to set the ClientSecret, ClientId, Domain and CallbackURL for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN` and `AUTH0_CALLBACK_URL`.
 
-For that, if you just create a file named `.env` in the project directory and set the values as follows, the app will just work:
+Set the environment variables in `.env` to match those your Auth0 Client.
 
 ````bash
 # .env file
-AUTH0_CLIENT_SECRET=myCoolSecret
 AUTH0_CLIENT_ID=myCoolClientId
+AUTH0_CLIENT_SECRET=myCoolSecret
 AUTH0_DOMAIN=samples.auth0.com
 AUTH0_CALLBACK_URL=http://localhost:3000/auth/auth0/callback
 ````
 Once you've set those 4 environment variables, run `bundle install` and then `rails s`. Now, browse [http://localhost:3000/](http://localhost:3000/).
+__Note:__ Remember that you need to have `./bin` in your path for `rails s` to work.
 
 Shut it down manually with Ctrl-C.
 
@@ -25,71 +26,73 @@ __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfi
 
 ## Important Snippets
 ### 1. Initialize the API Client Instance
+[Application Controller Code](/02-Custom-Login/app/controllers/application_controller.rb)
 ```ruby
 def client
-  creds = { client_id: ENV['AUTH0_CLIENT_ID'],
-    client_secret: ENV['AUTH0_CLIENT_SECRET'],
-    api_version: 1,
-    domain: ENV['AUTH0_DOMAIN'] }
-
-  @client = Auth0Client.new(creds)
+  creds = { client_id: Rails.application.secrets.auth0_client_id,
+            client_secret: Rails.application.secrets.auth0_client_secret,
+            api_version: 1,
+            domain: Rails.application.secrets.auth0_domain }
+  @client ||= Auth0Client.new(creds)
 end
 ```
 
-### 2. Create the Authentication Action in the Auth0 Controller
+### 2. Authentication Methods in Auth0 Controller
+[Auth0 Controller Code](/02-Custom-Login/app/controllers/auth0_controller.rb)
 ```ruby
 def callback
-  begin
-      if params[:signup]
-        signup
-      end
-      session[:token_id] = login
-    end
-    redirect_to '/dashboard'
-  rescue Auth0::Unauthorized
-    redirect_to '/', notice: 'Invalid email or password'
-  rescue => ex
-    redirect_to '/', notice: ex.message
+  if params[:user]
+    signup if params[:signup]
+    session[:token_id] = login
+  else
+    session[:token_id] = google_login
   end
+  redirect_to '/dashboard'
+rescue Auth0::Unauthorized
+  redirect_to '/', notice: 'Invalid email or password'
+rescue => ex
+  redirect_to '/', notice: ex.message
 end
 
-def failure
-  @error_msg = request.params['message']
+def google_authorize
+  redirect_to client.authorization_url(
+    Rails.application.secrets.auth0_callback_url,
+    connection: 'google-oauth2',
+    scope: 'openid'
+  ).to_s
 end
 
 def login
-  token = client.login(
+  client.login(
     params[:user],
     params[:password],
     authParams: {
-     scope: 'openid name email'
+      scope: 'openid name email'
     },
-    connection:'Username-Password-Authentication'
+    connection: 'Username-Password-Authentication'
   )
-
-  session[:token_id] = token
 end
 
 def signup
-  token = client.signup(
+  client.signup(
     params[:user],
     params[:password]
   )
 end
 ```
 
-### 3. Check if  User is Authenticated in Secured Controller
+### 3. Check if  User is Authenticated in Secured Controller Concern
+[Secured Controller Concern Code](/01-Login/app/controllers/concerns/secured.rb)
 ```ruby
-#Note: Controllers with secured actions will need to inherit from Secured Controller.
-class SecuredController < ApplicationController
-  before_action :logged_in?
+module Secured
+  extend ActiveSupport::Concern
 
-  private
+  included do
+    before_action :logged_in_using_omniauth?
+  end
 
-  def logged_in?
-    unless session[:token_id].present?
-      redirect_to '/'
-    end
+  def logged_in_using_omniauth?
+    redirect_to '/' unless session[:userinfo].present?
   end
 end
 ```
