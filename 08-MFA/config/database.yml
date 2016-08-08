@@ -11,10 +11,10 @@ test:
   adapter: sqlite3
   pool: 5
   timeout: 5000
-  database: db/development.sqlite3
+  database: db/test.sqlite3
 
 production:
-  adapter: postgresql
-  database: my_database_production
+  adapter: sqlite3
   pool: 5
   timeout: 5000
+  database: db/production.sqlite3
