@@ -19,6 +19,9 @@ Learn how to retrieve an Auth0 user’s profile in a Rails application using Omn
 ### 05 - Linking Accounts
 Learn how to link/unlink different Auth0 users accounts using Lock, OmniAuth, and the Auth0 Ruby SDK.
 
+### 07 - Authorization
+Learn how to add Authorization based on the user role for a resource in your Rails app.
+
 ### 08 - MFA
 Learn how to add Multifactor Authentication to your Auth0 authentication flow in a Rails app.
 
