@@ -1,0 +1,49 @@
+<section class="jumbotron text-center">
+  <h2><img class="jumbo-thumbnail img-circle" src="<%= @user[:info][:image] %>"/></h2>
+  <h1>Settings for <%= @user[:info][:name] %></h1>
+</section>
+
+<div class="row">
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">Link Accounts</div>
+    <div class="panel-body">
+    <%= form_tag({ action: 'link_provider' },{ class: 'form-horizontal col-xs-10 col-xs-offset-1' }) do %>
+        <div class="form-group">
+          <label class="col-xs-3 control-label">Provider</label>
+          <div class="col-xs-9">
+            <%= select_tag(:link_provider, options_for_select(@providers), class: 'form-control') %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-offset-3 col-xs-9">
+            <a class="btn btn-success btn-lg" onclick="linkPasswordAccount()">Link Accounts</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">Unlink Accounts</div>
+    <div class="panel-body">
+          <%= form_tag({ action: 'unlink_provider', method: 'post' },{ class: 'form-horizontal col-xs-10 col-xs-offset-1' }) do %>
+        <div class="form-group">
+          <label class="col-xs-3 control-label">Provider</label>
+          <div class="col-xs-9">
+            <%= select_tag(:unlink_provider, options_for_select(@unlink_providers), class: 'form-control') %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-offset-3 col-xs-9">
+            <%= button_tag(type: 'submit', class: "btn btn-danger btn-lg") do %>
+              Unlink Accounts
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>

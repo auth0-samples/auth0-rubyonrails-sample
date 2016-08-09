@@ -1,0 +1,12 @@
+<section class="jumbotron  text-center">
+  <h2><img class="jumbo-thumbnail img-circle" src="<%= @user['picture'] %>"/></h2>
+  <h1>Welcome, <%= @user['name'] %></h1>
+</section>
+<section class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">Normalized User Profile</div>
+    <div class="panel-body">
+      <pre><%= JSON.pretty_generate(@user) %></pre>
+    </div>
+  </div>
+</section>

@@ -21,18 +21,8 @@ Once you've set those 4 environment variables, run `bundle install` and then `ra
 
 __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfile.
 
-## Contents
-### 01 - Login
-Learn how to add login capabilities to your Rails application using the Auth0 Lock widget and the OmniAuth authentication system.
-
-### 02 - Custom Login
-Learn how to add login and signup capabilities to your Rails using the Auth0 Ruby SDK.
-### 04 - User Profile
-Learn how to retrieve an Auth0 user’s profile in a Rails application using OmniAuth.
-
 ## Used Libraries
 * [Auth0 Lock](https://github.com/auth0/lock)
-* [Auth0 Ruby SDK](https://github.com/auth0/ruby-auth0)
 * [OmniAuth](https://github.com/intridea/omniauth)
 * [OmniAuth Auth0 Strategy](https://github.com/auth0/omniauth-auth0)
 * [OmniAuth Oauth2](https://github.com/intridea/omniauth-oauth2)
