@@ -27,7 +27,7 @@ __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfi
 ## Important Snippets
 
 ### 1. Customizing the Lock instance
-
+[Home Javascript Code](/09-Customizing-Lock/app/assets/javascripts/home.js.erb)
 ```ruby
 var options = {
    auth: {

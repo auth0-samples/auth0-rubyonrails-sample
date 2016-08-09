@@ -27,7 +27,8 @@ __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfi
 ## Important Snippets
 
 ### 1. Auth0 Lock Setup
-```js
+[Home Javascript Code](/08-MFA/app/assets/javascripts/home.js.erb)
+```ruby
 var options = {
    auth: {
  		redirectUrl: '<%= Rails.application.secrets.auth0_callback_url %>',
