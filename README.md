@@ -13,6 +13,9 @@ Learn how to add login capabilities to your Rails application using the Auth0 Lo
 ### 02 - Custom Login
 Learn how to add login and signup capabilities to your Rails application using the Auth0 Ruby SDK.
 
+### 03 - Session Handling
+Learn how to store session data and cleanup the session on logout.
+
 ### 04 - User Profile
 Learn how to retrieve an Auth0 user’s profile in a Rails application using OmniAuth.
 
