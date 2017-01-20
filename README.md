@@ -40,13 +40,15 @@ Learn how to customize the Lock widget to match the look and feel of your app.
 
 ### Troubleshooting issues
 
-If you receive the following error, on Mac:
+1) If you receive the following error, on Mac:
+
 ```
 An error occurred while installing pg (0.19.0), and Bundler cannot continue.
 Make sure that `gem install pg -v '0.19.0'` succeeds before bundling.
 ```
 
 Try running the following commands:
+
 1. `brew update`
 2. `brew install postgresql`
 3. `gem install pg`
