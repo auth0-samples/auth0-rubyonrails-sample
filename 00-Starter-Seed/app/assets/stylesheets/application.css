@@ -15,11 +15,11 @@
  */
 
 .jumbo-thumbnail {
-    height: 200px;
+    height: 150px;
     width: 200px;
 }
 
 .jumbo-thumbnail img {
     top: 53%;
-    max-width: 40%;
+    max-width: 20%;
 }

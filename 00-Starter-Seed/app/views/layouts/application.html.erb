@@ -13,9 +13,6 @@
 <body>
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
-        <% flash.each do |key, value| %>
-         <div class= "alert-success"><%= value %></div>
-        <% end %>
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -28,6 +25,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="<%= 'active' if params[:controller] == 'home' %>"><a href="/">Home</a></li>
+            <li class="<%= 'active' if params[:controller] == 'dashboard' %>"><a href="/dashboard">My Dashboard</a></li>
           </ul>
         </div>
       </div>

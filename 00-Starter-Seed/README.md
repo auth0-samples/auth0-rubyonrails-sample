@@ -18,8 +18,62 @@ AUTH0_DOMAIN=samples.auth0.com
 AUTH0_CALLBACK_URL=http://localhost:3000/auth/auth0/callback
 ````
 Once you've set those 4 environment variables, run `bundle install` and then `rails s`. Now, browse [http://localhost:3000/](http://localhost:3000/).
+__Note:__ Remember that you need to have `./bin` in your path for `rails s` to work.
+
+Shut it down manually with Ctrl-C.
 
 __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfile.
+
+## Important Snippets
+
+### 1. Auth0 Hosted Login Page Setup
+[Home Controller Code](/00-Hosted-Login/app/controllers/home_controller.rb)
+```ruby
+def login
+  request_params = {
+    client: Rails.application.secrets.auth0_client_id,
+    redirect_uri: Rails.application.secrets.auth0_callback_url
+  }
+  url = URI::HTTPS.build(host: Rails.application.secrets.auth0_domain, path: '/login', query: to_query(request_params))
+  redirect_to url.to_s
+end
+```
+
+### 2. Check if  User is Authenticated in Secured Controller Concern
+[Secured Controller Concern Code](/00-Hosted-Login/app/controllers/concerns/secured.rb)
+```ruby
+module Secured
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :logged_in_using_omniauth?
+  end
+
+  def logged_in_using_omniauth?
+    redirect_to '/' unless session[:userinfo].present?
+  end
+end
+```
+
+### 3. Store User Profile Upon Successful Authentication
+[Auth0 Controller Code](/00-Hosted-Login/app/controllers/auth0_controller.rb)
+```ruby
+def callback
+  # OmniAuth places the User Profile information (retrieved by omniauth-auth0) in request.env['omniauth.auth'].
+  # In this tutorial, you will store that info in the session, under 'userinfo'.
+  # If the id_token is needed, you can get it from session[:userinfo]['credentials']['id_token'].
+  # Refer to https://github.com/auth0/omniauth-auth0#auth-hash for complete information on 'omniauth.auth' contents.
+  session[:userinfo] = request.env['omniauth.auth']
+
+  redirect_to '/dashboard'
+end
+
+# if user authentication fails on the provider side OmniAuth will redirect to /auth/failure,
+# passing the error message in the 'message' request param.
+def failure
+  @error_msg = request.params['message']
+end
+```
 
 ## Used Libraries
 * [Auth0 Lock](https://github.com/auth0/lock)
