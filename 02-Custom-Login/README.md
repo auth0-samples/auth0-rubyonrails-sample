@@ -31,8 +31,8 @@ __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfi
 def client
   creds = { client_id: Rails.application.secrets.auth0_client_id,
             client_secret: Rails.application.secrets.auth0_client_secret,
-            api_version: 1,
-            domain: Rails.application.secrets.auth0_domain }
+            domain: Rails.application.secrets.auth0_domain,
+            token: Rails.application.secrets.auth0_token }
   @client ||= Auth0Client.new(creds)
 end
 ```
