@@ -8,6 +8,8 @@ In order to run the example you need to have ruby installed.
 
 You also need to set the ClientSecret, ClientId, Domain and CallbackURL for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN` and `AUTH0_CALLBACK_URL`.
 
+Also, don't forget to add `http://localhost:3000/` as `Allowed Logout URLs` in your account settings.
+
 Set the environment variables in `.env` to match those your Auth0 Client.
 
 ````bash
@@ -27,21 +29,24 @@ __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfi
 ## Important Snippets
 
 ### 1. Auth0 Lock Setup
-[Home Javascript Code](/01-Login/app/assets/javascripts/home.js.erb)
-```ruby
-var options = {
-   auth: {
- 		redirectUrl: '<%= Rails.application.secrets.auth0_callback_url %>',
- 		params: {
- 			scope: 'openid name email picture'
- 		}
-   }
- };
-var lock = new Auth0Lock('<%= Rails.application.secrets.auth0_client_id %>', '<%= Rails.application.secrets.auth0_domain %>', options);
+[Application Javascript Code](/01-Login/app/views/layouts/application.html.erb)
+```js
+<%= javascript_include_tag '//cdn.auth0.com/js/auth0/8.8/auth0.min.js' %>
+<script>
+    var webAuth = new auth0.WebAuth({
+    domain: '<%= Rails.application.secrets.auth0_domain %>',
+    clientID: '<%= Rails.application.secrets.auth0_client_id %>',
+    redirectUri: '<%= Rails.application.secrets.auth0_callback_url %>',
+    audience: 'https://<%= Rails.application.secrets.auth0_domain %>/userinfo',
+    responseType: 'code',
+    scope: 'openid profile',
+    state: '<%= get_state %>'
+  });
 
-function signin() {
- 	lock.show();
-}
+  function signin() {
+    webAuth.authorize();
+  }
+</script>
 ```
 ### 2. Check if  User is Authenticated in Secured Controller Concern
 [Secured Controller Concern Code](/01-Login/app/controllers/concerns/secured.rb)
@@ -91,13 +96,23 @@ end
 ### 5. Logout Helper
 [Logout Helper Code](/01-Login/app/helpers/logout_helper.rb)
 ```ruby
-def logout_url
-  creds = { client_id: Rails.application.secrets.auth0_client_id,
-            client_secret: Rails.application.secrets.auth0_client_secret,
-            api_version: 1,
-            domain: Rails.application.secrets.auth0_domain }
-  client = Auth0Client.new(creds)
-  client.logout_url(root_url)
+module LogoutHelper
+  def logout_url
+    domain = Rails.application.secrets.auth0_domain
+    client_id = Rails.application.secrets.auth0_client_id
+    request_params = {
+      returnTo: root_url,
+      client_id: client_id
+    }
+
+    URI::HTTPS.build(host: domain, path: '/logout', query: to_query(request_params))
+  end
+
+  private
+
+  def to_query(hash)
+    hash.map { |k, v| "#{k}=#{URI.escape(v)}" unless v.nil? }.reject(&:nil?).join('&')
+  end
 end
 ```
 

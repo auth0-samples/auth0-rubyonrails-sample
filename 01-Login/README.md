@@ -27,21 +27,24 @@ __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfi
 ## Important Snippets
 
 ### 1. Auth0 Lock Setup
-[Home Javascript Code](/01-Login/app/assets/javascripts/home.js.erb)
-```ruby
-var options = {
-   auth: {
- 		redirectUrl: '<%= Rails.application.secrets.auth0_callback_url %>',
- 		params: {
- 			scope: 'openid name email picture'
- 		}
-   }
- };
-var lock = new Auth0Lock('<%= Rails.application.secrets.auth0_client_id %>', '<%= Rails.application.secrets.auth0_domain %>', options);
+[Application Javascript Code](/01-Login/app/views/layouts/application.html.erb)
+```js
+<%= javascript_include_tag '//cdn.auth0.com/js/auth0/8.8/auth0.min.js' %>
+<script>
+    var webAuth = new auth0.WebAuth({
+    domain: '<%= Rails.application.secrets.auth0_domain %>',
+    clientID: '<%= Rails.application.secrets.auth0_client_id %>',
+    redirectUri: '<%= Rails.application.secrets.auth0_callback_url %>',
+    audience: 'https://<%= Rails.application.secrets.auth0_domain %>/userinfo',
+    responseType: 'code',
+    scope: 'openid profile',
+    state: '<%= get_state %>'
+  });
 
-function signin() {
- 	lock.show();
-}
+  function signin() {
+    webAuth.authorize();
+  }
+</script>
 ```
 ### 2. Check if  User is Authenticated in Secured Controller Concern
 [Secured Controller Concern Code](/01-Login/app/controllers/concerns/secured.rb)
