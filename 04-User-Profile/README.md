@@ -27,19 +27,24 @@ __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfi
 ## Important Snippets
 
 ### 1. Store the User Profile Data Upon Successful Authentication
-[Auth0 Controller Code](/04-User-Profile/app/controllers/auth0_controller.rb)
-```ruby
-class Auth0Controller < ApplicationController
-  def callback
-    session[:userinfo] = request.env['omniauth.auth']
+[Application Javascript Code](/01-Login/app/views/layouts/application.html.erb)
+```js
+<%= javascript_include_tag '//cdn.auth0.com/js/auth0/8.8/auth0.min.js' %>
+<script>
+    var webAuth = new auth0.WebAuth({
+    domain: '<%= Rails.application.secrets.auth0_domain %>',
+    clientID: '<%= Rails.application.secrets.auth0_client_id %>',
+    redirectUri: '<%= Rails.application.secrets.auth0_callback_url %>',
+    audience: 'https://<%= Rails.application.secrets.auth0_domain %>/userinfo',
+    responseType: 'code',
+    scope: 'openid profile',
+    state: '<%= get_state %>'
+  });
 
-    redirect_to '/dashboard'
-  end
-
-  def failure
-    @error_msg = request.params['message']
-  end
-end
+  function signin() {
+    webAuth.authorize();
+  }
+</script>
 ```
 
 ### 2. Retrieve the User Data in the Dashboard Controller
