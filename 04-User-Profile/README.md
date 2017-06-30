@@ -4,6 +4,7 @@
 This example shows how to retrieve an Auth0 user’s profile ([normalized and full](https://auth0.com/docs/user-profile/user-profile-details)) in a Rails application using OmniAuth.
 
 ## Running the Sample Application
+
 In order to run the example you need to have ruby installed.
 
 You also need to set the ClientSecret, ClientId, Domain and CallbackURL for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN` and `AUTH0_CALLBACK_URL`.
@@ -12,9 +13,9 @@ Set the environment variables in `.env` to match those your Auth0 Client.
 
 ````bash
 # .env file
-AUTH0_CLIENT_ID=myCoolClientId
-AUTH0_CLIENT_SECRET=myCoolSecret
-AUTH0_DOMAIN=samples.auth0.com
+AUTH0_CLIENT_ID=YOUR_CLIENT_ID
+AUTH0_CLIENT_SECRET=YOUR_CLIENT_SECRET
+AUTH0_DOMAIN=<YOUR_TENANT>.auth0.com
 AUTH0_CALLBACK_URL=http://localhost:3000/auth/auth0/callback
 ````
 Once you've set those 4 environment variables, run `bundle install` and then `rails s`. Now, browse [http://localhost:3000/](http://localhost:3000/).
@@ -24,65 +25,30 @@ Shut it down manually with Ctrl-C.
 
 __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfile.
 
-## Important Snippets
+## What is Auth0?
 
-### 1. Store the User Profile Data Upon Successful Authentication
-[Application Javascript Code](/01-Login/app/views/layouts/application.html.erb)
-```js
-<%= javascript_include_tag '//cdn.auth0.com/js/auth0/8.8/auth0.min.js' %>
-<script>
-    var webAuth = new auth0.WebAuth({
-    domain: '<%= Rails.application.secrets.auth0_domain %>',
-    clientID: '<%= Rails.application.secrets.auth0_client_id %>',
-    redirectUri: '<%= Rails.application.secrets.auth0_callback_url %>',
-    audience: 'https://<%= Rails.application.secrets.auth0_domain %>/userinfo',
-    responseType: 'code',
-    scope: 'openid profile',
-    state: '<%= get_state %>'
-  });
+Auth0 helps you to:
 
-  function signin() {
-    webAuth.authorize();
-  }
-</script>
-```
+* Add authentication with [multiple authentication sources](https://docs.auth0.com/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, amont others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
+* Add authentication through more traditional **[username/password databases](https://docs.auth0.com/mysql-connection-tutorial)**.
+* Add support for **[linking different user accounts](https://docs.auth0.com/link-accounts)** with the same user.
+* Support for generating signed [Json Web Tokens](https://docs.auth0.com/jwt) to call your APIs and **flow the user identity** securely.
+* Analytics of how, when and where users are logging in.
+* Pull data from other sources and add it to the user profile, through [JavaScript rules](https://docs.auth0.com/rules).
 
-### 2. Retrieve the User Data in the Dashboard Controller
-[Dashboard Controller Code](/04-User-Profile/app/controllers/dashboard_controller.rb)
-```ruby
-class DashboardController < ApplicationController
-  include Secured
-  def show
-    @user = session[:userinfo]
-  end
-end
-```
+## Create a free Auth0 account
 
-### 3. Show the User Profile in the Dashboard View
-[Dashboard View Code](/04-User-Profile/app/views/dashboard/show.html.erb)
-```ruby
-<section class="jumbotron  text-center">
-  <h2><img class="jumbo-thumbnail img-circle" src="${ '<%= @user[:info][:image] %>' }"/></h2>
-  <h1>Welcome, ${ '<%= @user[:info][:name] %>' }</h1>
-</section>
-<section class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">Normalized User Profile</div>
-    <div class="panel-body">
-      <pre>${ '<%= JSON.pretty_generate(@user[:info]) %>' }</pre>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">Full User Profile</div>
-    <div class="panel-body">
-      <pre>${ '<%= JSON.pretty_generate(@user[:extra][:raw_info]) %>' }</pre>
-    </div>
-  </div>
-</section>
-```
+1. Go to [Auth0](https://auth0.com/signup) and click Sign Up.
+2. Use Google, GitHub or Microsoft Account to login.
 
-## Used Libraries
-* [Auth0 Lock](https://github.com/auth0/lock)
-* [OmniAuth](https://github.com/intridea/omniauth)
-* [OmniAuth Auth0 Strategy](https://github.com/auth0/omniauth-auth0)
-* [OmniAuth Oauth2](https://github.com/intridea/omniauth-oauth2)
+## Issue Reporting
+
+If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
+
+## Author
+
+[Auth0](auth0.com)
+
+## License
+
+This project is licensed under the MIT license. See the [LICENSE](LICENSE.txt) file for more info.
