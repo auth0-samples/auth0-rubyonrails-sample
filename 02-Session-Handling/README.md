@@ -28,9 +28,9 @@ Shut it down manually with Ctrl-C.
 __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfile.
 
 ## Running the Sample Application With Docker
-In order to run the example you need to have `docker` insatlled.
+In order to run the example you need to have `docker` installed.
 
-You also need to set the enviroment variables as explained [prevoisly](#running-the-sample-application).
+You also need to set the enviroment variables as explained [previously](#running-the-sample-application).
 
 Execute in command line `sh exec.sh` to run the Docker in Linux, or `.\exec.ps1` to run the Docker in Windows.
 
