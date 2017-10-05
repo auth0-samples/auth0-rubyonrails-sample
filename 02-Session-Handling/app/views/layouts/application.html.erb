@@ -37,21 +37,5 @@
   <div class="container">
     <%= yield %>
   </div>
-  <%= javascript_include_tag '//cdn.auth0.com/js/auth0/8.8/auth0.min.js' %>
-  <script>
-  var webAuth = new auth0.WebAuth({
-    domain: '<%= Rails.application.secrets.auth0_domain %>',
-    clientID: '<%= Rails.application.secrets.auth0_client_id %>',
-    redirectUri: '<%= Rails.application.secrets.auth0_callback_url %>',
-    audience: 'https://<%= Rails.application.secrets.auth0_domain %>/userinfo',
-    responseType: 'code',
-    scope: 'openid profile',
-    state: '<%= get_state %>'
-  });
-
-  function signin() {
-    webAuth.authorize();
-  }
-  </script>
 </body>
 </html>
