@@ -7,7 +7,9 @@ This example shows how to retrieve an Auth0 user’s profile ([normalized and fu
 
 In order to run the example you need to have ruby installed.
 
-You also need to set the ClientSecret, ClientId, Domain and CallbackURL for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN` and `AUTH0_CALLBACK_URL`.
+You also need to set the ClientSecret, ClientId, Domain, CallbackURL and Audience for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN`, `AUTH0_CALLBACK_URL` and `AUTH0_AUIDIENCE`.
+
+__Note:__ If you are not implementing any API, leave this variable empty, will be set with `https://AUTH0_DOMAIN/userinfo`.
 
 Set the environment variables in `.env` to match those your Auth0 Client.
 
@@ -17,8 +19,9 @@ AUTH0_CLIENT_ID=YOUR_CLIENT_ID
 AUTH0_CLIENT_SECRET=YOUR_CLIENT_SECRET
 AUTH0_DOMAIN=<YOUR_TENANT>.auth0.com
 AUTH0_CALLBACK_URL=http://localhost:3000/auth/auth0/callback
+AUTH0_AUDIENCE=YOUR_API_IDENTIFIER
 ````
-Once you've set those 4 environment variables, run `bundle install` and then `rails s`. Now, browse [http://localhost:3000/](http://localhost:3000/).
+Once you've set those 5 environment variables, run `bundle install` and then `rails s`. Now, browse [http://localhost:3000/](http://localhost:3000/).
 __Note:__ Remember that you need to have `./bin` in your path for `rails s` to work.
 
 Shut it down manually with Ctrl-C.
