@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Auth0 Ruby SDK
-gem 'auth0'
+# gem 'auth0'
 
 gem 'omniauth', '~> 1.6.1'
 gem 'omniauth-auth0', '~> 2.0.0'
