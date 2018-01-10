@@ -7,6 +7,8 @@ This example shows how to retrieve an Auth0 user’s profile ([normalized and fu
 
 In order to run the example you need to have ruby installed.
 
+Register `http://localhost:3000/auth/auth0/callback` as `Allowed Callback URLs` in your client setting in [Auth0's dashboard](https://manage.auth0.com/#/).
+
 You also need to set the ClientSecret, ClientId, Domain, CallbackURL and Audience for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN`, `AUTH0_CALLBACK_URL` and `AUTH0_AUIDIENCE`.
 
 __Note:__ If you are not implementing any API, leave this variable empty, will be set with `https://AUTH0_DOMAIN/userinfo`.
@@ -31,7 +33,7 @@ __Note:__ If you are using Windows, uncomment the `tzinfo-data` gem in the gemfi
 ## Running the Sample Application With Docker
 In order to run the example you need to have `docker` installed.
 
-You also need to set the enviroment variables as explained [previously](#running-the-sample-application).
+You also need to set the environment variables as explained [previously](#running-the-sample-application).
 
 Execute in command line `sh exec.sh` to run the Docker in Linux, or `.\exec.ps1` to run the Docker in Windows.
 
@@ -57,7 +59,7 @@ If you have found a bug or if you have a feature request, please report them at 
 
 ## Author
 
-[Auth0](auth0.com)
+[Auth0](https://auth0.com)
 
 ## License
 
