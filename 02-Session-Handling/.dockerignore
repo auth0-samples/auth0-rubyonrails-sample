@@ -2,3 +2,6 @@ vendor/
 .env.example
 .env
 README.md
+exec.sh
+exec.ps1
+*.sqlite3
