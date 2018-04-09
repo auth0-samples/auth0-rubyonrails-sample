@@ -24,7 +24,9 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="<%= 'active' if params[:controller] == 'home' %>"><a href="/">Home</a></li>
+            <% if session[:userinfo] %>
             <li class="<%= 'active' if params[:controller] == 'dashboard' %>"><a href="/dashboard">My Dashboard</a></li>
+            <% end %>
           </ul>
         </div>
       </div>
