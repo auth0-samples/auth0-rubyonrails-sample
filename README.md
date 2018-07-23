@@ -1,4 +1,7 @@
 # Auth0 + Ruby on Rails WebApp Seed + Samples
+
+[![CircleCI](https://circleci.com/gh/auth0-samples/auth0-rubyonrails-sample.svg?style=svg)](https://circleci.com/gh/auth0-samples/auth0-rubyonrails-sample)
+
 This project goal is to help integrating Auth0 capabilities in your Ruby on Rails application.
 
 You can learn more about the seed project and samples in the [Auth0 Rails quickstart](https://auth0.com/docs/quickstart/webapp/rails).

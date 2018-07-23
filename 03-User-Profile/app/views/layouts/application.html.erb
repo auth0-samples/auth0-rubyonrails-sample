@@ -32,7 +32,7 @@
           </ul>
           <% if session[:userinfo] %>
             <ul class="nav navbar-nav navbar-right">
-              <li class="<%= 'active' if params[:controller] == 'logout' %>"><a href="/logout">Logout</a></li>
+              <li class="<%= 'active' if params[:controller] == 'logout' %>"><a id="qsLogoutBtn" href="/logout">Logout</a></li>
             </ul>
           <% end %>
         </div>
