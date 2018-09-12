@@ -1,8 +1,9 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  if ENV['AUTH0_AUDIENCE'].blank?
-    audience = URI::HTTPS.build(host: ENV['AUTH0_DOMAIN'], path: '/userinfo').to_s
-  else
-    audience = ENV['AUTH0_AUDIENCE']
+  params = {
+    scope: 'openid profile'
+  }
+  unless ENV['AUTH0_AUDIENCE'].blank?
+    params.audience = ENV['AUTH0_AUDIENCE']
   end
 
   provider(
@@ -11,9 +12,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     ENV['AUTH0_CLIENT_SECRET'],
     ENV['AUTH0_DOMAIN'],
     callback_path: '/auth/auth0/callback',
-    authorize_params: {
-        scope: 'openid profile',
-        audience: audience
-    }
+    authorize_params: params
   )
 end

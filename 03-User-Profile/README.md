@@ -11,7 +11,7 @@ Register `http://localhost:3000/auth/auth0/callback` as `Allowed Callback URLs` 
 
 You also need to set the ClientSecret, ClientId, Domain, CallbackURL and Audience for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN`, `AUTH0_CALLBACK_URL` and `AUTH0_AUIDIENCE`.
 
-__Note:__ If you are not implementing any API, leave this variable empty, will be set with `https://AUTH0_DOMAIN/userinfo`.
+__Note:__ If you are not implementing any API, leave this variable empty.
 
 Set the environment variables in `.env` to match those your Auth0 Client.
 
