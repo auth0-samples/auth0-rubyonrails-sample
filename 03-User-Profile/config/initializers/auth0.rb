@@ -2,9 +2,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   params = {
     scope: 'openid profile'
   }
-  unless ENV['AUTH0_AUDIENCE'].blank?
-    params.audience = ENV['AUTH0_AUDIENCE']
-  end
+  
+  params.audience = ENV['AUTH0_AUDIENCE'] unless ENV['AUTH0_AUDIENCE'].blank?
 
   provider(
     :auth0,
