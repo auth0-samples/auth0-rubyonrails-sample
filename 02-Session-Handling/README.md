@@ -9,11 +9,11 @@ In order to run the example you need to have ruby installed.
 
 Register `http://localhost:3000/auth/auth0/callback` as `Allowed Callback URLs` in your client setting in [Auth0's dashboard](https://manage.auth0.com/#/).
 
-You also need to set the ClientSecret, ClientId, Domain and CallbackURL for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN` and `AUTH0_CALLBACK_URL`.
+You also need to set the Client Secret, Client ID, Domain and Callback URL for your Auth0 app as environment variables with the following names respectively: `AUTH0_CLIENT_SECRET`, `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN` and `AUTH0_CALLBACK_URL`.
 
 Also, don't forget to add `http://localhost:3000/` as `Allowed Logout URLs` in your account settings.
 
-Set the environment variables in `.env` to match those your Auth0 Client.
+Set the environment variables in `.env` to match those in your Auth0 Application Settings.
 
 ````bash
 # .env file
