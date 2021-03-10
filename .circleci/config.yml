@@ -52,24 +52,12 @@ jobs:
           paths:
             - project
             - scripts
-  01-login:
+  sample:
     machine: true
     environment:
-      - AUTH0_CFG: 01-Login/.env
-      - SAMPLE_PATH: 01-Login
+      - AUTH0_CFG: sample/.env
+      - SAMPLE_PATH: sample
     <<: *defaults
-  02-session-handling:
-      machine: true
-      environment:
-        - AUTH0_CFG: 02-Session-Handling/.env
-        - SAMPLE_PATH: 02-Session-Handling
-      <<: *defaults
-  03-user-profile:
-      machine: true
-      environment:
-        - AUTH0_CFG: 03-User-Profile/.env
-        - SAMPLE_PATH: 03-User-Profile
-      <<: *defaults
 
 workflows:
   version: 2
@@ -77,15 +65,7 @@ workflows:
     jobs:
       - checkout:
           context: Quickstart Web App Test
-      - 01-login:
+      - sample:
           context: Quickstart Web App Test
           requires:
             - checkout
-      - 02-session-handling:
-                context: Quickstart Web App Test
-                requires:
-                  - checkout
-      - 03-user-profile:
-                context: Quickstart Web App Test
-                requires:
-                  - checkout
