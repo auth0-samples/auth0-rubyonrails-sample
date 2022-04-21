@@ -1,7 +1,7 @@
 class Auth0Controller < ApplicationController
   def callback
-    # OmniAuth stores the informatin returned from Auth0 and the IdP in request.env['omniauth.auth'].
-    # In this sample, you will pull the raw_info supplied from the id_token
+    # OmniAuth stores the information returned from Auth0 and the IdP in request.env['omniauth.auth'].
+    # In this sample, you will pull the raw_info supplied from the id_token.
     # If the id_token is needed, you can get it from session[:userinfo]['credentials']['id_token'].
     # Refer to https://github.com/auth0/omniauth-auth0#authentication-hash for complete information on 'omniauth.auth' contents.
     session[:userinfo] = request.env['omniauth.auth']['extra']['raw_info']
