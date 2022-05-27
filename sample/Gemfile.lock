@@ -149,7 +149,7 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3.1)
-    rack-mini-profiler (2.3.1)
+    rack-mini-profiler (2.3.4)
       rack (>= 1.2.0)
     rack-protection (2.2.0)
       rack
@@ -234,7 +234,7 @@ DEPENDENCIES
   omniauth-auth0 (~> 3.0)
   omniauth-rails_csrf_protection (~> 1.0, >= 1.0.1)
   puma (~> 5.6)
-  rack-mini-profiler (~> 2.0)
+  rack-mini-profiler (~> 2.3)
   rails (~> 6.1.6)
   selenium-webdriver
   spring
