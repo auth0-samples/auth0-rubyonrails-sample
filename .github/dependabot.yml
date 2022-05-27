@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "bundle" 
+  - package-ecosystem: "bundler" 
     directory: "/sample" 
     schedule:
       interval: "daily"
