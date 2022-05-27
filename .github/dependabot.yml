@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "bundle" 
+    directory: "/sample" 
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]

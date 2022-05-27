@@ -22,12 +22,15 @@ class Auth0Controller < ApplicationController
 
   private
 
+  AUTH0_CONFIG = Rails.application.config.auth0
+
   def logout_url
+
     request_params = {
       returnTo: root_url,
       client_id: Rails.application.config.auth0['auth0_client_id']
     }
 
-    URI::HTTPS.build(host: Rails.application.config.auth0['auth0_domain'], path: '/v2/logout', query: request_params.to_query).to_s
+    URI::HTTPS.build(host: AUTH0_CONFIG['auth0_domain'], path: '/v2/logout', query: request_params.to_query).to_s
   end
 end
