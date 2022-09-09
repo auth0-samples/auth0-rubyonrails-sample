@@ -199,7 +199,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.4)
+    sqlite3 (1.5.0)
+      mini_portile2 (~> 2.8.0)
     thor (1.2.1)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
@@ -238,7 +239,7 @@ DEPENDENCIES
   rails (~> 6.1.6, >= 6.1.6.1)
   selenium-webdriver
   spring
-  sqlite3 (~> 1.4)
+  sqlite3 (~> 1.5)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.2.0)
