@@ -25,7 +25,7 @@ gem 'turbolinks', '~> 5'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # OmniAuth Auth0 strategy and CSRF protection
-gem 'omniauth-auth0', '~> 3.0'
+gem 'omniauth-auth0', '~> 3.1'
 gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
 
 group :development, :test do
