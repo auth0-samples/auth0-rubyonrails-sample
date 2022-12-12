@@ -248,7 +248,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.3)
   rails (~> 6.1.6, >= 6.1.6.1)
   selenium-webdriver
-  spring
+  spring (~> 4.0)
   sqlite3 (~> 1.5, >= 1.5.1)
   turbolinks (~> 5)
   tzinfo-data
@@ -256,7 +256,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.1.2p20
 
 BUNDLED WITH
-   2.1.4
+   2.3.12
